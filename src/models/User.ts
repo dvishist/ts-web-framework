@@ -1,36 +1,34 @@
 import axios from 'axios'
+import { Attributes } from './Attributes'
 import { Eventing } from './Eventing'
+import { Sync } from './Sync'
 
-interface UserProps {
+export interface UserProps {
 	id?: number
 	name?: string
 	age?: number
 }
 
+const url = 'https://localhost:3000/users'
+
 export class User {
-	constructor(private data: UserProps, public events: Eventing = new Eventing()) {}
+	public events: Eventing = new Eventing()
+	public sync: Sync<UserProps> = new Sync<UserProps>(url)
+	public attributes: Attributes<UserProps>
 
-	fetch(): void {
-		const id = this.get('id')
-		axios.get(`${URL}/users/${id}`).then(response => {
-			this.set(response.data)
-		})
+	constructor(props: UserProps) {
+		this.attributes = new Attributes<UserProps>(props)
 	}
 
-	save(): void {
-		const id = this.get('id')
-		if (id) {
-			axios.put(`${URL}/users/${id}`, this.data)
-		} else {
-			axios.post(`${URL}/users`, this.data)
-		}
+	get get() {
+		return this.attributes.get
 	}
 
-	get<K extends keyof UserProps>(propName: K): string | number | void {
-		return this.data[propName as keyof UserProps]
+	get on() {
+		return this.events.on
 	}
 
-	set(update: UserProps): void {
-		Object.assign(this.data, update)
+	get trigger() {
+		return this.events.trigger
 	}
 }
