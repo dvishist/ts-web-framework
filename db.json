@@ -1,39 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "New Name",
-      "age": 233
-    },
-    {
-      "name": "New Name",
-      "age": 233,
-      "id": 2
-    },
-    {
-      "name": "New Name",
-      "age": 233,
-      "id": 3
-    },
-    {
-      "name": "New Name",
-      "age": 233,
-      "id": 4
-    },
-    {
-      "name": "New Name",
-      "age": 233,
-      "id": 5
-    },
-    {
-      "name": "New Name",
-      "age": 233,
-      "id": 6
-    },
-    {
-      "name": "New Name",
-      "age": 233,
-      "id": 7
+      "id": 1
     }
   ]
 }

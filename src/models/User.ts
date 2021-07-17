@@ -1,7 +1,7 @@
-import axios from 'axios'
+import { Model } from './Model'
 import { Attributes } from './Attributes'
-import { Eventing } from './Eventing'
 import { Sync } from './Sync'
+import { Eventing } from './Eventing'
 
 export interface UserProps {
 	id?: number
@@ -9,26 +9,14 @@ export interface UserProps {
 	age?: number
 }
 
-const url = 'https://localhost:3000/users'
+const url = 'http://localhost:3000/users'
 
-export class User {
-	public events: Eventing = new Eventing()
-	public sync: Sync<UserProps> = new Sync<UserProps>(url)
-	public attributes: Attributes<UserProps>
-
-	constructor(props: UserProps) {
-		this.attributes = new Attributes<UserProps>(props)
-	}
-
-	get get() {
-		return this.attributes.get
-	}
-
-	get on() {
-		return this.events.on
-	}
-
-	get trigger() {
-		return this.events.trigger
+export class User extends Model<UserProps> {
+	static build(attributes: UserProps): User {
+		return new User(
+			new Attributes<UserProps>(attributes),
+			new Eventing(),
+			new Sync<UserProps>(url)
+		)
 	}
 }

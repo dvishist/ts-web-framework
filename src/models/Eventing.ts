@@ -1,6 +1,6 @@
 type Callback = () => void
 
-//when not using arrow functions, you need to bind context 'this' in the constructor
+//when not using arrow functions, you need to bind context 'this' in
 export class Eventing {
 	events: { [key: string]: Callback[] } = {}
 
