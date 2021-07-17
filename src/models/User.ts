@@ -2,6 +2,7 @@ import { Model } from './Model'
 import { Attributes } from './Attributes'
 import { Sync } from './Sync'
 import { Eventing } from './Eventing'
+import { Collection } from './Collection'
 
 export interface UserProps {
 	id?: number
@@ -18,5 +19,9 @@ export class User extends Model<UserProps> {
 			new Eventing(),
 			new Sync<UserProps>(url)
 		)
+	}
+
+	static buildCollection(): Collection<User, UserProps> {
+		return new Collection(url, (props: UserProps) => User.build(props))
 	}
 }
