@@ -1,10 +1,17 @@
-import { UserForm } from './views/UserForm'
-import { User } from './models/User'
+import { UserList } from './views/UserList'
+import { Collection } from './models/Collection'
+import { User, UserProps } from './models/User'
 
-const user = User.build({
-	name: 'Vishist',
-	age: 22
+const url = 'http://localhost:3000/users'
+
+const collection = new Collection(url, (props: UserProps) => User.build(props))
+
+collection.on('change', () => {
+	const root = document.getElementById('root')
+	if (root) {
+		new UserList(root, collection).render()
+	}
 })
-const userForm = new UserForm(document.getElementById('root')!, user)
 
-userForm.render()
+collection.fetch()
+console.log(collection)

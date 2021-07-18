@@ -41,12 +41,15 @@ export abstract class View<T extends Model<U>, U> {
 		}
 	}
 
+	renderChildren(): void {}
+
 	render(): void {
 		this.parent.innerHTML = ''
 		const templateElement = document.createElement('template')
 		templateElement.innerHTML = this.template()
 		this.bindEvents(templateElement.content)
 		this.bindChildren(templateElement.content)
+		this.renderChildren()
 		this.parent.append(templateElement.content)
 	}
 }

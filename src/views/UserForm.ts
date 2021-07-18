@@ -27,13 +27,6 @@ export class UserForm extends View<User, UserProps> {
 	template(): string {
 		return `
             <div>
-                <h1>User Form</h1>
-				<div>
-					User Name: ${this.model.get('name')}
-				</div>
-				<div>
-					User Age: ${this.model.get('age')}
-				</div>
                 <input placeholder="${this.model.get('name')}"/>
 				<button class="set-name">Set Name</button>
 				<button class="set-age">Set Random Age</button>
